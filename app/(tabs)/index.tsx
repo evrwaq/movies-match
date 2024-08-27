@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 export default function MoviesCatalogScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Movie Couples App</Text>
+      <Text style={styles.title}>Movies Match</Text>
     </View>
   )
 }
