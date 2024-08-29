@@ -1,9 +1,15 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { ThemedText } from '@/components/ThemedText';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default function LoginScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login with Google</Text>
+      <View style={styles.topContainer}>
+        <Text style={styles.title}>Movies Match</Text>
+      </View>
+      <View style={styles.bottomContainer}>
+        <Text style={styles.text}>Login with Google</Text>
+      </View>
     </View>
   )
 }
@@ -11,16 +17,27 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
     backgroundColor: '#121212',
   },
+  topContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomContainer: {
+    flex: 1,
+  },
   title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#F56700'
+  },
+  text: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 40,
     textAlign: 'center',
-    color: '#fcfcfc'
+    color: '#F56700'
   },
 })
