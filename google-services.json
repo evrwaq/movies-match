@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "393589199528",
+    "project_id": "movies-match-2998b",
+    "storage_bucket": "movies-match-2998b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393589199528:android:2cf4da52f3168f2648689d",
+        "android_client_info": {
+          "package_name": "com.evrwaq.movies_match"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3Qadasl-JjyDm86G2gxzP-9enDJqcFc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
