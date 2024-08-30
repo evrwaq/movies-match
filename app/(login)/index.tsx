@@ -7,6 +7,7 @@ export default function LoginScreen() {
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
+      console.log('entrou')
       const userInfo = await GoogleSignin.signIn();
       // setState({ userInfo, error: undefined });
       console.log(userInfo)
@@ -23,7 +24,7 @@ export default function LoginScreen() {
             console.log('play services not available or outdated')
             break;
           default:
-            console.log('some other error happened')
+            console.log(`some other error happened: ${error}`)
         }
       } else {
         console.log('an error that\'s not related to google sign in occurred')
@@ -39,7 +40,7 @@ export default function LoginScreen() {
       <View style={styles.bottomContainer}>
         <Text style={styles.text}>Login with Google</Text>
       </View>
-      <GoogleSigninButton />
+      <GoogleSigninButton onPress={async() => await signIn()} />
     </View>
   )
 }
