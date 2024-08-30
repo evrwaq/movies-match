@@ -1,7 +1,36 @@
-import { ThemedText } from '@/components/ThemedText';
+import { GoogleSignin, GoogleSigninButton, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default function LoginScreen() {
+  GoogleSignin.configure();
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      // setState({ userInfo, error: undefined });
+      console.log(userInfo)
+    } catch (error) {
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.SIGN_IN_CANCELLED:
+            console.log('user cancelled the login flow')
+            break;
+          case statusCodes.IN_PROGRESS:
+            console.log('operation (eg. sign in) already in progress')
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            console.log('play services not available or outdated')
+            break;
+          default:
+            console.log('some other error happened')
+        }
+      } else {
+        console.log('an error that\'s not related to google sign in occurred')
+      }
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -10,6 +39,7 @@ export default function LoginScreen() {
       <View style={styles.bottomContainer}>
         <Text style={styles.text}>Login with Google</Text>
       </View>
+      <GoogleSigninButton />
     </View>
   )
 }
