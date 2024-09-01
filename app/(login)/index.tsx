@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { useAuthentication } from '@/hooks/useAuthentication'
 
-
 export default function LoginScreen() {
   const { signIn, signOut } = useAuthentication()
  
