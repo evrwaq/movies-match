@@ -1,5 +1,7 @@
 import { StyleSheet, View, Text, Button } from 'react-native'
+import { doc, setDoc } from 'firebase/firestore'; 
 import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin'
+import { db } from '@/firebaseConfig'
 
 
 export default function LoginScreen() {
@@ -9,7 +11,14 @@ export default function LoginScreen() {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo)
-      // setState({ userInfo, error: undefined });
+      try {
+        await setDoc(doc(db, "users", userInfo.user.id), {
+          email: userInfo.user.email,
+          name: userInfo.user.name
+        })
+      } catch (error) {
+        console.error(error)
+      }
     } catch (error) {
       if (isErrorWithCode(error)) {
         switch (error.code) {
