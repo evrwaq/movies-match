@@ -1,10 +1,12 @@
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { doc, setDoc } from 'firebase/firestore'; 
 import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin'
-import { db } from '@/firebaseConfig'
+import { useFirebase } from '@/hooks/useFirebase';
 
 
 export default function LoginScreen() {
+  const { db } = useFirebase()
+
   GoogleSignin.configure()
   const signIn = async () => {
     try {
