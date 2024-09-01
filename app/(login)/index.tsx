@@ -1,46 +1,54 @@
-import { GoogleSignin, GoogleSigninButton, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native'
+import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin'
+
 
 export default function LoginScreen() {
-  GoogleSignin.configure();
-
+  GoogleSignin.configure()
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      console.log('entrou')
       const userInfo = await GoogleSignin.signIn();
-      // setState({ userInfo, error: undefined });
       console.log(userInfo)
+      // setState({ userInfo, error: undefined });
     } catch (error) {
       if (isErrorWithCode(error)) {
         switch (error.code) {
           case statusCodes.SIGN_IN_CANCELLED:
-            console.log('user cancelled the login flow')
+            // user cancelled the login flow
             break;
           case statusCodes.IN_PROGRESS:
-            console.log('operation (eg. sign in) already in progress')
+            // operation (eg. sign in) already in progress
             break;
           case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-            console.log('play services not available or outdated')
+            // play services not available or outdated
             break;
           default:
-            console.log(`some other error happened: ${error}`)
+          // some other error happened
         }
       } else {
-        console.log('an error that\'s not related to google sign in occurred')
+        // an error that's not related to google sign in occurred
       }
     }
-  }
+  };
 
+  const signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+      // setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+ 
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>Movies Match</Text>
       </View>
       <View style={styles.bottomContainer}>
-        <Text style={styles.text}>Login with Google</Text>
+        <Button  onPress={signIn} title='Login with Google'/>
+        <Button  onPress={signOut} title='Sign Out'/>
       </View>
-      <GoogleSigninButton onPress={async() => await signIn()} />
     </View>
   )
 }
