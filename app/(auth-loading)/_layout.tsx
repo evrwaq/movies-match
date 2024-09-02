@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-export default function LoginLayout() {
+export default function AuthLoadingLayout() {
   return (
     <Stack
       screenOptions={{
