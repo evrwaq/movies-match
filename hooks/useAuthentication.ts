@@ -1,4 +1,6 @@
 import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { User } from '@/types/user'
 import { useFirebase } from './useFirebase'
 
 export function useAuthentication() {
@@ -6,14 +8,16 @@ export function useAuthentication() {
 
   const signIn = async () => {
     try {
+      GoogleSignin.configure()
       await GoogleSignin.hasPlayServices()
       const userInfo = await GoogleSignin.signIn()
-      console.log(userInfo)
-      try {
-        await addUser(userInfo.user.id, userInfo.user.email, userInfo.user.name!)
-      } catch (error) {
-        console.error(error)
+      const user: User = {
+        id: userInfo.user.id,
+        email: userInfo.user.email,
+        name: userInfo.user.name!
       }
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+      await addUser(user)
     } catch (error) {
       if (isErrorWithCode(error)) {
         switch (error.code) {

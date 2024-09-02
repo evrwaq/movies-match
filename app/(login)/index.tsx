@@ -1,9 +1,29 @@
 import { StyleSheet, View, Text, Button } from 'react-native'
 import { useAuthentication } from '@/hooks/useAuthentication'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen() {
   const { signIn, signOut } = useAuthentication()
  
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('user');
+      console.log(value)
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const cleanAsyncStorage = async () => {
+    try {
+      await AsyncStorage.removeItem('user')
+    } catch(e) {
+      // remove error
+    }
+
+  console.log('Done.')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -12,6 +32,8 @@ export default function LoginScreen() {
       <View style={styles.bottomContainer}>
         <Button onPress={signIn} title='Login with Google'/>
         <Button onPress={signOut} title='Sign Out'/>
+        <Button onPress={getData} title='Get use values'/>
+        <Button onPress={cleanAsyncStorage} title='Clean async storage'/>
       </View>
     </View>
   )
