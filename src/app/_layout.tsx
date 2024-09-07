@@ -1,24 +1,24 @@
-import { useFonts } from "expo-font";
-import { Slot, Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import "react-native-reanimated";
+import { useFonts } from 'expo-font'
+import { Slot, Stack } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
+import { useEffect } from 'react'
+import 'react-native-reanimated'
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-  });
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  })
 
   useEffect(() => {
     if (loaded || error) {
-      SplashScreen.hideAsync();
+      SplashScreen.hideAsync()
     }
-  }, [loaded, error]);
+  }, [loaded, error])
 
   if (!loaded && !error) {
-    return <Slot />;
+    return <Slot />
   }
 
   return (
@@ -28,5 +28,5 @@ export default function RootLayout() {
       <Stack.Screen name="login" options={{ headerShown: false }} />
       {/* <Stack.Screen name="+not-found" /> */}
     </Stack>
-  );
+  )
 }

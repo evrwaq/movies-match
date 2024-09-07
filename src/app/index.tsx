@@ -1,16 +1,16 @@
-import { Link, useRouter } from "expo-router";
-import { useEffect } from "react";
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Link, useRouter } from 'expo-router'
+import { useEffect } from 'react'
+import { Text } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function InitialPageHandler() {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     setTimeout(() => {
-      router.navigate("/home");
-    }, 2400);
-  }, [router]);
+      router.navigate('/home')
+    }, 2400)
+  }, [router])
   // useEffect(() => {
   //   const a = false;
   //   if (a) {
@@ -27,5 +27,5 @@ export default function InitialPageHandler() {
         Login
       </Link>
     </SafeAreaView>
-  );
+  )
 }
