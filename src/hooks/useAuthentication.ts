@@ -13,7 +13,6 @@ export function useAuthentication() {
   const signIn = async () => {
     try {
       GoogleSignin.configure()
-      await GoogleSignin.hasPlayServices()
       const userInfo = await GoogleSignin.signIn()
       const user: User = {
         id: userInfo.data!.user.id,
@@ -45,6 +44,7 @@ export function useAuthentication() {
 
   const signOut = async () => {
     try {
+      GoogleSignin.configure()
       await GoogleSignin.signOut()
       // setState({ user: null }); // Remember to remove the user from your app's state as well
     } catch (error) {
