@@ -4,10 +4,12 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useRouter } from 'expo-router'
 import { useFirebase } from './useFirebase'
 import { User } from '../models'
 
 export function useAuthentication() {
+  const router = useRouter()
   const { addUser } = useFirebase()
 
   const signIn = async () => {
@@ -21,6 +23,7 @@ export function useAuthentication() {
       }
       await AsyncStorage.setItem('user', JSON.stringify(user))
       await addUser(user)
+      router.replace('/home')
     } catch (error) {
       if (isErrorWithCode(error)) {
         switch (error.code) {
@@ -52,8 +55,17 @@ export function useAuthentication() {
     }
   }
 
+  const cleanAsyncStorage = async () => {
+    try {
+      await AsyncStorage.removeItem('user')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
     signIn,
     signOut,
+    cleanAsyncStorage,
   }
 }
